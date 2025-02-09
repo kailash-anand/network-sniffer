@@ -1,0 +1,9 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.so
+*.pyo
+
+# Virtual environment (venv)
+venv/
+env/
