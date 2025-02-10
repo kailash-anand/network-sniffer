@@ -35,14 +35,18 @@ def load_dependencies():
 def process_packet(packet) -> None:
     timestamp = datetime.fromtimestamp(packet.time)
     protocol = get_protocol(packet)
-    source_IP = packet[IP].src
-    dest_IP = packet[IP].dst
+    source_IP = ""
+    dest_IP = ""
+    source_port = ""
+    dest_port = ""
+
+    if packet.haslayer('IP'):
+        source_IP = packet[IP].src
+        dest_IP = packet[IP].dst
+
     if packet.haslayer('TCP') or packet.haslayer('UDP'):
         source_port = packet[TCP].sport if packet.haslayer('TCP') else packet[UDP].sport
-        dest_port = packet[TCP].dport if packet.haslayer('TCP') else packet[UDP].dport
-    else:
-        source_port = ""
-        dest_port = ""
+        dest_port = packet[TCP].dport if packet.haslayer('TCP') else packet[UDP].dport    
 
     parser = PARSER_MAP.get(protocol, lambda _: {})
     additional_info = parser(packet)
@@ -58,6 +62,8 @@ def get_protocol(packet) -> str:
     for layer in reversed(packet.layers()):
         if layer.__name__ in PROTOCOL_TABLE:
             return layer.__name__
+        
+    return "N/A"
     
     
 

@@ -7,9 +7,11 @@ def tls_parser(packet) -> None:
 
     if packet.haslayer(TLSClientHello):
         client_hello = packet[TLSClientHello]
-        servernames = client_hello.ext[0].servernames
-        server_name = servernames[0].servername.decode()
-        info["hostname"] = str(server_name)
+        extensions = client_hello.ext
+
+        for x in extensions:
+            if x.type == 0:
+                info["hostname"] = x.servernames[0].servername.decode()
 
     return info
              
