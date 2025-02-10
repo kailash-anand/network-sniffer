@@ -55,8 +55,7 @@ def process_packet(packet) -> None:
     output = f"{timestamp} {protocol} {source_IP}:{source_port} -> {dest_IP}:{dest_port}"
     if additional_info:
         output += f" {additional_info}"
-
-    print(output)
+        print(output)
 
 def get_protocol(packet) -> str:
     for layer in reversed(packet.layers()):

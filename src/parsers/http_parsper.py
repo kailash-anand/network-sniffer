@@ -6,7 +6,9 @@ def http_parser(packet):
     if packet.haslayer('HTTPRequest'):
         method = packet[HTTPRequest].Method.decode()
         hostname = packet[HTTPRequest].Host.decode()
-        items["method"] = str(method)
+        path = packet[HTTPRequest].Path.decode()
         items["hostname"] = str(hostname)
+        items["method"] = str(method)
+        items["Path"] = str(path)
 
     return items
