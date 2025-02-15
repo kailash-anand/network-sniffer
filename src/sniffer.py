@@ -23,7 +23,13 @@ PARSER_MAP = {
 def start_sniff(interface: str, tracefile: str, expression: str) -> None:
     try:
         load_dependencies()
-        sniff(iface=interface, filter=expression, prn=process_packet, store=False) 
+
+        if tracefile != None:
+            packets = rdpcap(tracefile)
+            for packet in packets:
+                    process_packet(packet)
+        else:
+            sniff(iface=interface, filter=expression, prn=process_packet, store=False) 
     
     except Exception as e:
         print(str(e))
@@ -33,7 +39,7 @@ def load_dependencies():
     load_layer('http')
 
 def process_packet(packet) -> None:
-    timestamp = datetime.fromtimestamp(packet.time)
+    timestamp = datetime.fromtimestamp(float(packet.time))
     protocol = get_protocol(packet)
     source_IP = ""
     dest_IP = ""

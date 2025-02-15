@@ -1,2 +1,0 @@
-23:59:22.402756 IP 172.25.232.187.60849 > a23-215-0-138.deploy.static.akamaitechnologies.com.http: Flags [P.], seq 1:75, ack 1, win 2061, options [nop,nop,TS val 4268488383 ecr 2458634666], length 74: HTTP: GET / HTTP/1.1
-.k......GET / HTTP/1.1
