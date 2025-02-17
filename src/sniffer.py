@@ -1,5 +1,5 @@
 from scapy.all import * 
-from src.parsers.http_parsper import http_parser
+from src.parsers.http_parser import http_parser
 from src.parsers.dns_parser import dns_parser
 from src.parsers.tls_parser import tls_parser
 from datetime import datetime
