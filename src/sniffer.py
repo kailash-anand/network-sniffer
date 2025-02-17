@@ -26,8 +26,11 @@ def start_sniff(interface: str, tracefile: str, expression: str) -> None:
 
         if tracefile != None:
                 packets = rdpcap(tracefile)
-                for packet in packets:
-                    process_packet(packet) 
+                if expression:
+                    sniff(offline=tracefile, filter=expression, prn=process_packet)
+                else:
+                    for packet in packets:
+                        process_packet(packet)
         else:
             sniff(iface=interface, filter=expression, prn=process_packet, store=False) 
     
