@@ -7,11 +7,15 @@ def tls_parser(packet) -> None:
 
     if packet.haslayer(TLSClientHello):
         client_hello = packet[TLSClientHello]
-        extensions = client_hello.ext
+        extensions = getattr(client_hello, 'ext', [])
 
         for x in extensions:
-            if x.type == 0:
-                info["hostname"] = x.servernames[0].servername.decode()
+            if hasattr(x, 'type') and x.type == 0:
+                if hasattr(x, 'servernames') and x.servernames:
+                    try:
+                        info["hostname"] = x.servernames[0].servername.decode(errors="ignore")
+                    except IndexError:
+                        pass
 
     return info
              

@@ -13,11 +13,11 @@ DNS_QUERY_TYPES = {
 def dns_parser(packet):
     items = {}
 
-    if packet.haslayer('DNS'):
+    if packet.haslayer('DNS') and hasattr(packet[DNS], 'qd') and packet[DNS].qd:
         record_type = packet[DNS].qd.qtype
 
         if record_type in DNS_QUERY_TYPES and DNS_QUERY_TYPES[record_type] == "A":
-            hostname = packet[DNS].qd.qname.decode()
+            hostname = packet[DNS].qd.qname.decode(errors="ignore")
             items["hostname"] = hostname
 
     return items
