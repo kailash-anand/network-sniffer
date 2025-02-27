@@ -72,8 +72,3 @@ def get_protocol(packet) -> str:
             return layer.__name__
         
     return "N/A"
-    
-    
-
-
-
