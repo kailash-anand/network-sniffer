@@ -42,11 +42,15 @@ The tool relies on **Scapy** for packet capture and analysis.
   ```
 
 2. **(Optional) Create a Virtual Environment**
+  ```sh
   python3 -m venv venv
   source venv/bin/activate
+  ```
 
 3. **Install Dependencies**
+  ```sh
   pip install -r requirements.txt
+  ```
 
 ## Notes
 - The tool will automatically select the default network interface eth0 if none is specified.
