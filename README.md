@@ -39,6 +39,7 @@ The tool relies on **Scapy** for packet capture and analysis.
   ```sh
   git clone https://github.com/kailash-anand/network-sniffer.git
   cd network-sniffer
+  ```sh
 
 2. **(Optional) Create a Virtual Environment**
   python3 -m venv venv
