@@ -2,6 +2,7 @@ from scapy.all import *
 from src.parsers.http_parser import http_parser
 from src.parsers.dns_parser import dns_parser
 from src.parsers.tls_parser import tls_parser
+from src.parsers.tcp_parser import tcp_parser
 from datetime import datetime
 import cryptography
 
@@ -17,7 +18,8 @@ PROTOCOL_TABLE = {
 PARSER_MAP = {
     "DNS" : dns_parser,
     "TLS" : tls_parser,
-    "HTTP" : http_parser
+    "HTTP" : http_parser,
+    "TCP" : tcp_parser
 }
 
 def start_sniff(interface: str, tracefile: str, expression: str) -> None:
@@ -27,7 +29,7 @@ def start_sniff(interface: str, tracefile: str, expression: str) -> None:
         if tracefile != None:
                 packets = rdpcap(tracefile)
                 if expression:
-                    sniff(offline=tracefile, filter=expression, prn=process_packet)
+                    sniff(offline=tracefile, filter=expression, prn=process_packet, store=False)
                 else:
                     for packet in packets:
                         process_packet(packet)
@@ -45,6 +47,7 @@ def process_packet(packet) -> None:
     try:
         timestamp = datetime.fromtimestamp(float(packet.time))
         protocol = get_protocol(packet)
+        additional_info = {}
         source_IP = ""
         dest_IP = ""
         source_port = ""
@@ -56,12 +59,15 @@ def process_packet(packet) -> None:
 
         if packet.haslayer('TCP') or packet.haslayer('UDP'):
             source_port = packet[TCP].sport if packet.haslayer('TCP') else packet[UDP].sport
-            dest_port = packet[TCP].dport if packet.haslayer('TCP') else packet[UDP].dport    
+            dest_port = packet[TCP].dport if packet.haslayer('TCP') else packet[UDP].dport
 
         parser = PARSER_MAP.get(protocol, lambda _: {})
         additional_info = parser(packet)
-        additional_info = " ".join(f"{v}" for v in additional_info.values())
-
+        for k,v in additional_info.items():
+            if k == "protocol":
+                protocol = v
+        additional_info = " ".join(f"{v}" for k, v in additional_info.items() if k != "protocol")
+        
         output = f"{timestamp} {protocol} {source_IP}:{source_port} -> {dest_IP}:{dest_port}"
         if additional_info:
             output += f" {additional_info}"
