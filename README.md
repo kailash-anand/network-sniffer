@@ -49,8 +49,30 @@ The tool relies on **Scapy** for packet capture and analysis.
 
 3. **Install Dependencies**
   ```sh
-  pip install -r requirements.txt
+  pip install scapy
+  pip install cryptography
   ```
+
+## Test Runs
+```sh
+python3 capture.py
+```
+2025-02-28 17:50:22.403320 DNS 192.168.151.128:41182 -> 192.168.151.2:53 www.youtube.com.
+2025-02-28 17:50:22.412461 DNS 192.168.151.2:53 -> 192.168.151.128:41182 www.youtube.com.
+2025-02-28 17:50:22.434212 TLS 192.168.151.128:58616 -> 142.251.179.190:443 www.youtube.com
+2025-02-28 17:50:31.555284 DNS 192.168.151.128:35569 -> 192.168.151.2:53 www.google.com.
+2025-02-28 17:50:31.564033 DNS 192.168.151.2:53 -> 192.168.151.128:35569 www.google.com.
+2025-02-28 17:50:31.584963 HTTP 192.168.151.128:57736 -> 142.251.179.147:80 www.google.com GET /
+2025-02-28 17:51:16.393594 DNS 192.168.151.128:57761 -> 192.168.151.2:53 www.aniwatch.com.
+2025-02-28 17:51:16.397924 DNS 192.168.151.2:53 -> 192.168.151.128:57761 www.aniwatch.com.
+
+```sh
+python3 capture.py -i lo
+``` 
+2025-02-28 17:54:40.160422 HTTP 127.0.0.1:34164 -> 127.0.0.1:9000 localhost GET
+2025-02-28 17:54:40.160423 HTTP 127.0.0.1:34164 -> 127.0.0.1:9000 localhost GET
+2025-02-28 17:54:43.578907 HTTP 127.0.0.1:34176 -> 127.0.0.1:9000 localhost GET
+2025-02-28 17:54:43.578908 HTTP 127.0.0.1:34176 -> 127.0.0.1:9000 localhost GET
 
 ## Notes
 - The tool will automatically select the default network interface eth0 if none is specified.
