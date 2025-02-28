@@ -41,12 +41,10 @@ The tool relies on **Scapy** for packet capture and analysis.
   cd network-sniffer
 
 2. **(Optional) Create a Virtual Environment**
-  ```sh
   python3 -m venv venv
   source venv/bin/activate
 
 3. **Install Dependencies**
-  ```sh
   pip install -r requirements.txt
 
 ## Notes
