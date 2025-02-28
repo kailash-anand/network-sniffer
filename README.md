@@ -36,15 +36,15 @@ The tool relies on **Scapy** for packet capture and analysis.
 
 #### **Installation Steps**
 1. **Clone the Repository**
-   `git clone https://github.com/kailash-anand/network-sniffer.git`
-   `cd network-sniffer`
+   ```git clone https://github.com/kailash-anand/network-sniffer.git```
+   ```cd network-sniffer```
 
 2. **(Optional) Create a Virtual Environment**
-    `python3 -m venv venv`
-    `source venv/bin/activate`
+    ```python3 -m venv venv```
+    ```source venv/bin/activate```
 
 3. **Install Dependencies**
-    `pip install -r requirements.txt`
+    ```pip install -r requirements.txt```
 
 ## Notes
 - The tool will automatically select the default network interface eth0 if none is specified.
