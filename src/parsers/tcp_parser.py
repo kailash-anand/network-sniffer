@@ -21,6 +21,7 @@ def tcp_parser(packet):
                 if len(line) >= 2 and line[0] in {"GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS", "PATCH"}:
                     method = line[0]
                     items['method'] = str(method)
+                    items['uri'] = str(line[1])
         elif len(raw_payload) >= 5:
             content_type = raw_payload[0]
             
@@ -37,10 +38,6 @@ def tcp_parser(packet):
     return items
 
 def parse_tls_sni(payload):
-    """
-    Parse the TLS ClientHello for the SNI hostname.
-    Assumes payload is the raw TLS record (starting at the TLS record header).
-    """
     if len(payload) < 5:
         return None
 
