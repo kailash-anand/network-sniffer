@@ -73,6 +73,14 @@ python3 capture.py -i lo
 2025-02-28 17:54:40.160423 HTTP 127.0.0.1:34164 -> 127.0.0.1:9000 localhost GET
 2025-02-28 17:54:43.578907 HTTP 127.0.0.1:34176 -> 127.0.0.1:9000 localhost GET
 2025-02-28 17:54:43.578908 HTTP 127.0.0.1:34176 -> 127.0.0.1:9000 localhost GET
+2025-02-28 19:44:46.447166 TLS :45410 -> :8443 localhost
+2025-02-28 19:44:46.447170 TLS :45410 -> :8443 localhost
+2025-02-28 19:44:52.056095 TLS :43782 -> :8443 localhost
+2025-02-28 19:44:52.056106 TLS :43782 -> :8443 localhost
+2025-02-28 19:45:48.012030 DNS 127.0.0.1:45323 -> 127.0.0.1:5353 example.com.
+2025-02-28 19:45:48.012031 DNS 127.0.0.1:45323 -> 127.0.0.1:5353 example.com.
+2025-02-28 19:45:48.012092 DNS 127.0.0.1: -> 127.0.0.1: example.com.
+2025-02-28 19:45:48.012093 DNS 127.0.0.1: -> 127.0.0.1: example.com.
 
 ## Notes
 - The tool will automatically select the default network interface eth0 if none is specified.
